@@ -1,0 +1,72 @@
+{
+    "author": "neolao",
+    "license": "MIT",
+    "name": "rhgamestation-api",
+    "description": "REST API for RHGamestation",
+    "version": "1.2.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/rhgamestation/rhgamestation-api.git"
+    },
+    "engines": {
+        "node": ">=4"
+    },
+    "main": "./bundle/Api.js",
+    "dependencies": {
+        "pm2"                       : "1.0.*",
+        "solfegejs"                 : "1.5.*",
+        "solfegejs-cli"             : "1.4.*",
+        "solfegejs-server"          : "1.6.*",
+        "solfegejs-server-router"   : "1.4.*",
+        "ini"                       : "1.3.*",
+        "file-size"                 : "1.0.*",
+        "js2xmlparser"              : "1.0.*",
+        "ioctl"                     : "1.0.1",
+        "struct"                    : "0.0.8",
+        "xml2js"                    : "0.4.*"
+    },
+    "devDependencies": {
+        "babel-cli"     : "6.5.*",
+        "babel-preset-es2015": "6.5.*",
+        "babel-preset-stage-0": "6.5.*",
+        "babel-plugin-syntax-flow": "6.5.*",
+        "babel-plugin-transform-flow-strip-types": "6.5.*",
+        "babel-plugin-typecheck" : "3.6.*",
+        "babel-plugin-closure-elimination": "1.0.*",
+        "babel-plugin-add-module-exports": "0.1.2",
+        "chai"          : "2.3.*",
+        "mocha"         : "2.2.*",
+        "supertest"     : "1.1.*"
+    },
+    "scripts": {
+        "start"         : "pm2 startOrReload ./scripts/pm2-process-production.json",
+        "stop"          : "pm2 stop ./scripts/pm2-process-production.json",
+        "delete"        : "pm2 delete ./scripts/pm2-process-production.json",
+        "monitoring"    : "pm2 monit ./scripts/pm2-process-production.json",
+        "logs"          : "pm2 logs --lines 5",
+        "services"      : "pm2 ls",
+
+        "dev-start"     : "pm2 startOrReload ./scripts/pm2-process-development.json",
+        "dev-stop"      : "pm2 stop ./scripts/pm2-process-development.json",
+        "dev-logs"      : "pm2 logs --lines 5",
+
+        "console"       : "node --harmony --harmony-proxies ./bundle/console.js",
+        "es6-watch"     : "babel bundle-es6 --watch --out-dir bundle",
+        "es6-compile"   : "babel bundle-es6 --out-dir bundle",
+
+        "test"          : "mocha --harmony --harmony-proxies --recursive --reporter spec --bail"
+    },
+    "babel": {
+        "presets": ["stage-0"],
+        "comments": false,
+        "plugins": [
+            "typecheck",
+            "syntax-flow",
+            "transform-flow-strip-types",
+            "closure-elimination",
+            "add-module-exports",
+
+            "transform-es2015-modules-commonjs"
+        ]
+    }
+}

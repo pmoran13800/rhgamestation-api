@@ -1,0 +1,17 @@
+{
+    "apps" : [{
+        "name"               : "api",
+        "exec_interpreter"   : "node",
+        "exec_mode"          : "cluster",
+        "instances"          : 1,
+        "log_date_format"    : "YYYY-MM-DD HH:mm Z",
+        "max_memory_restart" : "100M",
+        "merge_logs"         : true,
+        "node_args"          : ["--harmony", "--harmony_proxies"],
+        "script"             : [
+                                   process.env.API_HOME?process.env.API_HOME:".",
+                                   "/bundle/console.js"
+                               ].join(""),
+        "args"               : ["server:start"]
+    }]
+}
